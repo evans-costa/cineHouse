@@ -1,0 +1,18 @@
+[
+    {
+        "codigo": 23,
+        "titulo": "Um Sonho de Liberdade",
+        "duracao": 2,
+        "atores": ["Tim Robbins", "Morgan Freeman"],
+        "anoDeLancamento": 1994,
+        "emCartaz": false
+    },
+    {
+        "codigo": 45,
+        "titulo": "Telefone Preto",
+        "duracao": 1,
+        "atores": ["Ethan Hawke", "Mason Thames"],
+        "anoDeLancamento": 2021,
+        "emCartaz": true
+    }
+]
