@@ -1,4 +1,5 @@
 const cinema = "CineHouse";
+const fs = require ("fs")
 const catalogo = require("./database/catalogo.json");
 
 function adicionarFilme(
@@ -18,23 +19,31 @@ function adicionarFilme(
     emCartaz: emCartaz,
   };
   catalogo.push(novoFilme);
+
+  fs.writeFile("./database/catalogo.json", JSON.stringify(catalogo, null, 3), err => {
+    if (err) throw err; 
+    console.log("Filme adicionado!")
+  })
 }
 
-function buscarFilme(codigo) {
-  for (let i = 0; i < catalogo.length; i++) {
-    if (catalogo[i].codigo === codigo) {
-      return console.log(catalogo[i]);
+function buscarFilme(id) {
+  let filmeBuscado = catalogo.find(filme => filme.codigo === id) 
+    console.log(`O filme escolhido foi ${filmeBuscado.titulo}. Estrelando: ${filmeBuscado.atores}. Ele tem ${filmeBuscado.duracao} minutos de duração e foi lançado em ${filmeBuscado.anoDeLancamento}`)
+}
+
+
+function alterarStatusEmCartaz(id) {
+  let filmeAlterado = catalogo.find(filme => filme.codigo === id) 
+    if (filmeAlterado.emCartaz == true) {
+      filmeAlterado.emCartaz = false
+    } else {
+      filmeAlterado.emCartaz = true
     }
-  }
+    
+    fs.writeFile("./database/catalogo.json", JSON.stringify(catalogo, null, 3), err => {
+      if (err) throw err; 
+      console.log("Filme em cartaz foi alterado!")
+    }) 
 }
 
-function alterarStatusEmCartaz(codigo) {
-  for (let i = 0; i < catalogo.length; i++) {
-    return catalogo[i].codigo === codigo
-      ? catalogo[i].emCartaz
-      : !catalogo[i].emCartaz;
-  }
-}
-
-alterarStatusEmCartaz(45);
-buscarFilme(45);
+alterarStatusEmCartaz(45)
